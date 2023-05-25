@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        }
+
+        .emp-profile {
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: #fff;
+        }
+
+        .profile-img {
+            text-align: center;
+        }
+
+        .profile-img img {
+            width: 70%;
+            height: 100%;
+        }
+
+        .profile-img .file {
+            position: relative;
+            overflow: hidden;
+            margin-top: -20%;
+            width: 70%;
+            border: none;
+            border-radius: 0;
+            font-size: 15px;
+            background: #212529b8;
+        }
+
+        .profile-img .file input {
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            top: 0;
+        }
+
+        .profile-head h5 {
+            color: #333;
+        }
+
+        .profile-head h6 {
+            color: #0062cc;
+        }
+
+        .profile-edit-btn {
+            border: none;
+            border-radius: 1.5rem;
+            width: 70%;
+            padding: 2%;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .proile-rating {
+            font-size: 12px;
+            color: #818182;
+            margin-top: 5%;
+        }
+
+        .proile-rating span {
+            color: #495057;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .profile-head .nav-tabs {
+            margin-bottom: 5%;
+        }
+
+        .profile-head .nav-tabs .nav-link {
+            font-weight: 600;
+            border: none;
+        }
+
+        .profile-head .nav-tabs .nav-link.active {
+            border: none;
+            border-bottom: 2px solid #0062cc;
+        }
+
+        .profile-work {
+            padding: 14%;
+            margin-top: -15%;
+        }
+
+        .profile-work p {
+            font-size: 12px;
+            color: #818182;
+            font-weight: 600;
+            margin-top: 10%;
+        }
+
+        .profile-work a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-work ul {
+            list-style: none;
+        }
+
+        .profile-tab label {
+            font-weight: 600;
+        }
+
+        .profile-tab p {
+            font-weight: 600;
+            color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+<div class="container emp-profile">
+    <a class="btn btn-success" th:href="@{/product/add}">Add Product</a>
+    <a class="btn btn-success" th:href="@{/category/list}">Show Category</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>PhotoUrl</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td><img th:src="${product.photoUrl}" width="200" height="170"></td>
+            <td th:text="${product.category.name}"></td>
+            <td><a th:href="@{/product/update(product_id=${product.id})}" class="btn btn-warning">Edit</a></td>
+            <td><a th:href="@{/product/delete(product_id=${product.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+<!--<div th:if="${!category.productSet.isEmpty()}" th:each="category: ${categories}">-->
+<!--    <h2  th:text="${category.name}"></h2>-->
+<!--    <div class="row">-->
+<!--        <div class="col-sm-4 g-mb-30" >-->
+<!--            <article class="u-shadow-v18 g-bg-white text-center rounded g-px-20 g-py-40 g-mb-5">-->
+<!--                <img class="d-inline-block img-fluid mb-4"-->
+<!--                     alt="Image Description" th:src="${product.photoUrl}"-->
+<!--                     style="-->
+<!--                 border-radius: 8px;-->
+<!--                 width: 150px;-->
+<!--                 height: 200px;">-->
+<!--                <h4 class="h5 g-color-black g-font-weight-600 g-mb-10" th:text="${product.name}"></h4>-->
+<!--                <span class="d-block g-color-primary g-font-size-16" th:text="${product.price}"></span>-->
+<!--                <p th:text="${product.description}"-->
+<!--                   style="-->
+<!--               text-overflow: ellipsis;-->
+<!--               white-space: nowrap;-->
+<!--               overflow: hidden;-->
+<!--               display: inline-block;-->
+<!--               vertical-align: top;-->
+<!--               background: #f6f6f6;-->
+<!--               border: 1px solid #bdbdbd;-->
+<!--               border-radius: 4px;-->
+<!--               padding: 1rem;-->
+<!--               line-height: 1.4;-->
+<!--               width: 200px;-->
+<!--               margin-right: 1rem;-->
+<!--               margin-bottom: 1rem;"></p>-->
+<!--            </article>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div th:each="product: ${products}">-->
+<!--    <p th:text=" ${product.name}"></p>-->
+<!--    <p th:text=" ${product.price}"></p>-->
+<!--    <img th:src="${product.photoUrl}"-->
+<!--         style="width: 10%">-->
+<!--</div>-->
